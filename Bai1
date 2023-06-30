@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int targetNumber = 10; // Số cần nhập
+
+        int attempts = 0; // Biến đếm số lần nhập
+        boolean success = false; // Biến kiểm tra thành công
+
+        while (attempts < 5) {
+            System.out.print("Nhập số cần nhập: ");
+            int userInput = scanner.nextInt();
+            attempts++;
+
+            if (userInput == targetNumber) {
+                System.out.println("Thành công! Bạn đã nhập đúng số cần nhập.");
+                success = true;
+                break;
+            } else {
+                System.out.println("Số bạn nhập không đúng. Vui lòng thử lại.");
+            }
+        }
+
+        if (!success) {
+            System.out.println("Số lần nhập đã vượt quá giới hạn. Chương trình kết thúc.");
+        }
+
+        scanner.close();
+    }
+}
