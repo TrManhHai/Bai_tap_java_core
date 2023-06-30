@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nhập số điện đã dùng trong tháng: ");
+        int soDien = scanner.nextInt();
+
+        int giaDien;
+        if (soDien <= 100) {
+            giaDien = soDien * 1000;
+        } else if (soDien <= 150) {
+            giaDien = 100 * 1000 + (soDien - 100) * 1500;
+        } else {
+            giaDien = 100 * 1000 + 50 * 1500 + (soDien - 150) * 2000;
+        }
+
+        System.out.println("Số tiền điện cần thanh toán: " + giaDien + "đ");
+
+        scanner.close();
+    }
+}
