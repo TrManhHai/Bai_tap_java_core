@@ -1,0 +1,9 @@
+CREATE	DATABASE Sinh_vien;
+USE Sinh_vien;
+CREATE TABLE  `sinh_vien` (
+	
+	ten 					NVARCHAR(50) NOT NULL ,
+    gioi_tinh					ENUM('Male','Female','None') NOT NULL,
+    que_quan				VARCHAR(100),
+    tuoi					INT	UNSIGNED
+);

@@ -1,0 +1,59 @@
+package com.company;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+        // Kết nối cơ sở dữ liệu
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sinh_vien", "root", "root")) {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Nhập số lượng sinh viên: ");
+            int n = scanner.nextInt();
+            scanner.nextLine();
+
+            for (int i = 0; i < n; i++) {
+                System.out.println("Nhập thông tin sinh viên thứ " + (i + 1) + ":");
+
+                System.out.print("Tên: ");
+                String ten = scanner.nextLine();
+
+                System.out.print("Giới tính: ");
+                String gioiTinh = scanner.nextLine();
+
+                System.out.print("Quê quán: ");
+                String queQuan = scanner.nextLine();
+
+                System.out.print("Tuổi: ");
+                int tuoi = scanner.nextInt();
+                scanner.nextLine();
+
+                // Thực hiện chèn dữ liệu vào cơ sở dữ liệu
+                insertStudent(connection, ten, gioiTinh, queQuan, tuoi);
+
+                System.out.println("Thông tin sinh viên đã được chèn vào cơ sở dữ liệu.");
+                System.out.println("--------------------------------------");
+            }
+
+            scanner.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void insertStudent(Connection connection, String ten, String gioiTinh, String queQuan, int tuoi) throws SQLException {
+        String query = "INSERT INTO sinh_vien (ten, gioi_tinh, que_quan, tuoi) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, ten);
+            statement.setString(2, gioiTinh);
+            statement.setString(3, queQuan);
+            statement.setInt(4, tuoi);
+
+            statement.executeUpdate();
+        }
+    }
+}
